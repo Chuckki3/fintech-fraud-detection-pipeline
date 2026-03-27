@@ -1,4 +1,4 @@
--- Step 1: Create clean transactions table
+--  Create clean transactions table
 
 CREATE OR REPLACE TABLE `dotted-rookery-490711-i3.hostfi.transactions_clean` AS
 SELECT
