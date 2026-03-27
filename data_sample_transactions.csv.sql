@@ -1,0 +1,1 @@
+SELECT * FROM `dotted-rookery-490711-i3.Paysim_unbroken.transactions_total` LIMIT 100
