@@ -1,5 +1,15 @@
 Fintech Fraud Detection Pipeline
+
+
+
+
+
 Overview
+
+
+
+
+
 
 This project implements an end-to-end fraud detection pipeline using transactional data, simulating how fintech companies identify and flag suspicious financial activity.
 
@@ -14,19 +24,54 @@ Google BigQuery
 Data Engineering (ETL, Feature Engineering, Data Modeling)
 
  
+
+ 
+ 
+ 
+ 
  Pipeline Architecture
+
+
+
+
+
 Transaction Data 
+ 
+   
    ↓
+
+
 Data Cleaning (transactions_clean)
+
+   
    ↓
+
+
 Feature Engineering
+
+   
    ↓
+
+
 Risk Scoring
+
+   
    ↓
+
+
 Fraud Detection Output
-🔍 Feature Engineering
+
+
+
+
+
+ Feature Engineering
+
+
 
 The system derives key behavioral indicators from transaction data:
+
+
 
 Transaction Velocity → detects rapid activity bursts
 
@@ -43,6 +88,8 @@ Transaction Type Risk Filtering → focuses on high-risk flows
 A weighted scoring system evaluates fraud risk:
 
 Feature	Weight
+
+
 High-risk transaction type	2
 High velocity	1
 Amount anomaly	2
@@ -51,6 +98,11 @@ Destination anomaly	1
 
 Transactions exceeding a defined threshold are flagged as suspicious.
 
+
+ 
+ 
+ 
+ 
  Project Structure
 sql/
   01_create_clean_table.sql
@@ -71,7 +123,14 @@ architecture/
   architecture.md
 
 
+
+
+
+
+
 How to Run
+
+
 
 Execute SQL scripts sequentially:
 
@@ -90,6 +149,9 @@ real-time event-driven pipelines
 API-based fraud scoring systems
 
 streaming data platforms
+
+
+
 
 
 
