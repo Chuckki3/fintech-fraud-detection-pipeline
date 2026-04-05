@@ -1,0 +1,13 @@
+CREATE OR REPLACE TABLE `paysim-fraud-pipeline.paysim.transactions_scored_v2` AS
+SELECT
+  *,
+
+  (
+    CASE WHEN type IN ('TRANSFER','CASH_OUT') THEN 2 ELSE 0 END +
+    CASE WHEN tx_last_step >= 3 THEN 1 ELSE 0 END +
+    CASE WHEN amount > 2.5 * avg_amount AND amount > 200000 THEN 2 ELSE 0 END +
+    (balance_error * 3) +
+    (empty_dest_account * 1)
+  ) AS risk_score
+
+FROM `paysim-fraud-pipeline.paysim.fraud_features`;

@@ -1,0 +1,13 @@
+CREATE OR REPLACE TABLE `paysim-fraud-pipeline.paysim.customer_segments` AS
+SELECT
+  *,
+
+  CASE
+    WHEN total_amount > 10000000 THEN 'High Value'
+    WHEN transaction_frequency > 2 THEN 'Highly Active'
+    WHEN amount_variability > 200000 THEN 'Irregular Behavior'
+    WHEN total_transactions < 5 THEN 'Low Activity'
+    ELSE 'Regular User'
+  END AS customer_segment
+
+FROM `paysim-fraud-pipeline.paysim.customer_360`;

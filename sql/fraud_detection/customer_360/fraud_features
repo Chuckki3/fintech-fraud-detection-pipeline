@@ -1,0 +1,26 @@
+CREATE OR REPLACE TABLE `paysim-fraud-pipeline.paysim.fraud_features` AS
+SELECT
+  *,
+
+  COUNT(*) OVER (
+    PARTITION BY nameOrig
+    ORDER BY step
+    RANGE BETWEEN 1 PRECEDING AND CURRENT ROW
+  ) AS tx_last_step,
+
+  AVG(amount) OVER (PARTITION BY nameOrig) AS avg_amount,
+
+  CASE 
+    WHEN amount > 3 * AVG(amount) OVER (PARTITION BY nameOrig)
+    THEN 1 ELSE 0 
+  END AS amount_spike,
+
+  CASE 
+    WHEN oldbalanceOrg - amount != newbalanceOrig THEN 1 ELSE 0 
+  END AS balance_error,
+
+  CASE 
+    WHEN oldbalanceDest = 0 AND newbalanceDest = 0 THEN 1 ELSE 0 
+  END AS empty_dest_account
+
+FROM `paysim-fraud-pipeline.paysim.transactions_clean_fixed`;

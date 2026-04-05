@@ -1,172 +1,168 @@
-Fintech Fraud Detection Pipeline
+#  Fintech Fraud Detection & Customer 360 Data Pipeline
 
+This project simulates a real-world fintech data system — evolving from **transaction-level fraud detection** to a **Customer 360 intelligence pipeline**.
 
+It demonstrates how combining fraud signals with user behavior enables more **context-aware, intelligent decision-making**.
 
+---
 
+## 📌 Project Overview
 
-Overview
+Traditional fraud systems ask:
 
+> *“Is this transaction suspicious?”*
 
+This project extends that thinking to:
 
+> *“Is this transaction suspicious for this specific user?”*
 
+By integrating fraud detection with customer-level behavioral profiling, the system provides deeper insights into **risk, patterns, and user behavior**.
 
+---
 
-This project implements an end-to-end fraud detection pipeline using transactional data, simulating how fintech companies identify and flag suspicious financial activity.
+## ⚙️ Pipeline Architecture
 
-Built using SQL in Google BigQuery, the system applies behavioral feature engineering and a rule-based risk scoring model to detect potential fraud.
+```
+Raw Data → Cleaning → Feature Engineering → Risk Scoring → Enrichment → Customer 360 → Segmentation
+```
 
-⚙️ Tech Stack
+---
 
-SQL
+## 🧾 Data Pipeline Stages
 
-Google BigQuery
+### 1. Transaction Cleaning
 
-Data Engineering (ETL, Feature Engineering, Data Modeling)
+ Fix schema misalignment
+ Standardize structure
+ Output: `transactions_clean_fixed`
 
- 
+### 2. Fraud Feature Engineering
 
- 
- 
- 
- 
- Pipeline Architecture
+ Transaction velocity
+ Behavioral anomalies
+ Balance inconsistencies
+ Output: `fraud_features`
 
+### 3. Risk Scoring
 
+ Rule-based fraud scoring system
+ Flags suspicious transactions
+ Output: `transactions_scored_v2`
 
+### 4. Fraud Enrichment
 
+ Combines features + risk scores
+ Creates analysis-ready dataset
+ Output: `fraud_enriched`
 
-Transaction Data 
- 
-   
-   ↓
+### 5. Customer 360 Pipeline
 
+ Aggregates transactions to user level
+ Builds behavioral profiles
+ Integrates fraud signals
+ Output: `customer_360`
 
-Data Cleaning (transactions_clean)
+### 6. Customer Segmentation
 
-   
-   ↓
+ Classifies users into behavioral groups:
 
+   High Value
+   Highly Active
+   Irregular Behavior
+   Low Activity
+ Output: `customer_segments`
 
-Feature Engineering
+---
 
-   
-   ↓
+##  Key Insights
 
+ Fraud detection improves significantly when combined with **user-level context**
+ High-risk scores correlate strongly with fraudulent activity
+ Fraud is **behavior-driven**, not random
+ Certain customer segments exhibit higher fraud concentration
+ Behavioral features (frequency, amount patterns) are strong indicators of risk
 
-Risk Scoring
+---
 
-   
-   ↓
+## 🛠️ Tech Stack
 
+ **SQL (BigQuery)** — Data transformation & pipeline logic
+ **Python (Google Colab)** — Analysis & exploration
+ **Pandas / Matplotlib** — Data analysis & visualization
 
-Fraud Detection Output
+---
 
+##  Repository Structure
 
+```
+├── data/
+│   ├── raw/
+│   ├── cleaned/
+│   
+│
+├── sql/
+│   ├── fraud_detection/
+│   └── customer_360/
+│
+├── notebooks/
+│   └── customer_360_analysis.ipynb
+│
+├── outputs/
+│   ├── transactions_scored_sample.csv
+│   ├── customer_360_sample.csv
+│   └── customer_segments_sample.csv
+│
+├── docs/
+│   ├── architecture.md
+│   ├── methodology.md
+│   └── data_dictionary.md
+│
+└── README.md
+```
 
+---
 
+## 📓 Notebook
 
+[Customer 360 Analysis](notebooks/customer_360_analysis.ipynb)
 
- 
- 
- 
- 
- Feature Engineering
+This notebook explores:
 
+ Fraud risk distribution
+ Customer segmentation patterns
+ Behavioral relationships
+ Key insights from the pipeline
 
+---
 
-The system derives key behavioral indicators from transaction data:
+## 📊 Sample Outputs
 
+Sample datasets are included to demonstrate:
 
+ Fraud detection results
+ Customer-level profiles
+ Segmentation outcomes
 
-Transaction Velocity → detects rapid activity bursts
+> Full datasets are not included due to size constraints.
 
-Amount Anomaly Detection → flags unusual transaction sizes
+---
 
-Balance Inconsistency Check → identifies ledger mismatches
+##  Challenges & Learnings
 
-Destination Account Analysis → detects suspicious accounts
+ Encountered schema misalignment during ingestion
+ Required manual column remapping and pipeline rebuild
+ Reinforced the importance of **data quality and structure**
 
-Transaction Type Risk Filtering → focuses on high-risk flows
+---
 
- Risk Scoring Model
+##  Future Improvements
 
-A weighted scoring system evaluates fraud risk:
+ Machine learning models for predictive fraud detection
+ Real-time data pipelines
+ Dashboard for monitoring fraud and customer behavior
 
-Feature	Weight
+---
 
+## Let’s Connect
 
-High-risk transaction type	2
-High velocity	1
-Amount anomaly	2
-Balance inconsistency	3
-Destination anomaly	1
-
-Transactions exceeding a defined threshold are flagged as suspicious.
-
-
- 
- 
- 
- 
- Project Structure
-sql/
-  01_create_clean_table.sql
-  02_velocity_feature.sql
-  03_amount_feature.sql
-  04_balance_feature.sql
-  05_destination_feature.sql
-  06_risk_scoring.sql
-  07_improved_model.sql
-
-docs/
-  methodology.md
-
-data/
-  sample_data.csv
-
-architecture/
-  architecture.md
-
-
-
-
-
-
-
-How to Run
-
-
-
-Execute SQL scripts sequentially:
-
-01 → 02 → 03 → 04 → 05 → 06 → 07
-
-Each step builds on the previous stage of the pipeline.
-
- Real-World Application
-
-This project simulates a fraud detection system used in fintech environments.
-
-While implemented in batch mode, the architecture is designed to be extended into:
-
-real-time event-driven pipelines
-
-API-based fraud scoring systems
-
-streaming data platforms
-
-
-
-
-
-
-
-Future Improvements
-
-Machine Learning model (BigQuery ML)
-
-Real-time fraud detection pipeline
-
-Dashboard for monitoring fraud metrics
-
-Feature store integration
+If you're working in fintech, data engineering, or fraud systems, I’d love to connect and exchange ideas.
